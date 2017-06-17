@@ -12,7 +12,9 @@
  */
 
 #include<iostream>
+#include <cstdlib>
 using namespace std;
+
 int part(int a[],int start,int end)
 {
     int pivot=a[end];
@@ -33,11 +35,21 @@ int part(int a[],int start,int end)
     a[end]=temp2;
     return pIndex;
 }
+int randompart(int a[],int start,int end)
+{
+    int range = end - start + 1;
+    int pIndex = rand() % range + start;
+    
+    int temp3=a[pIndex];
+    a[pIndex]=a[end];
+    a[end]=temp3;
+    return part(a,start,end);
+}
 void quickSort(int a[],int start,int end)
 {
     if(start<end)
     {
-        int pIndex=part(a,start,end);
+        int pIndex=randompart(a,start,end);
         quickSort(a,start,pIndex-1);
         quickSort(a,pIndex+1,end);
     }
